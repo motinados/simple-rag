@@ -1,9 +1,11 @@
 "use client";
-import { generateMessage } from "@/lib/actions";
+import { generateMessageWithKnowledgeBase } from "@/lib/actions";
 
 export default function Home() {
   const run = async () => {
-    const result = await generateMessage("What is my favorite food?");
+    const result = await generateMessageWithKnowledgeBase(
+      "What is my favorite food?"
+    );
     console.log(result);
   };
 

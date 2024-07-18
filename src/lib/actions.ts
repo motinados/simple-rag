@@ -65,7 +65,7 @@ export const findTopSimilarEmbeddings = async (
   return similarities.slice(0, top);
 };
 
-export const generateMessage = async (input: string) => {
+export const generateMessageWithKnowledgeBase = async (input: string) => {
   const topSimilarEmbeddings = await findRelevantContent(input);
 
   const { text } = await generateText({
