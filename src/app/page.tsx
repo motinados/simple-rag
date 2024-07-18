@@ -1,9 +1,9 @@
 "use client";
-import { generateEmbeddings } from "@/lib/actions";
+import { findRelevantContent } from "@/lib/actions";
 
 export default function Home() {
   const run = async () => {
-    const result = await generateEmbeddings("Hello, world!");
+    const result = await findRelevantContent("I like to read books.");
     console.log(result);
   };
 
