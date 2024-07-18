@@ -1,9 +1,9 @@
 "use client";
-import { findRelevantContent } from "@/lib/actions";
+import { generateMessage } from "@/lib/actions";
 
 export default function Home() {
   const run = async () => {
-    const result = await findRelevantContent("I like to read books.");
+    const result = await generateMessage("What is my favorite food?");
     console.log(result);
   };
 

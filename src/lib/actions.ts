@@ -1,7 +1,7 @@
 "use server";
 
 import { openai } from "@ai-sdk/openai";
-import { cosineSimilarity, embedMany } from "ai";
+import { cosineSimilarity, embedMany, generateText } from "ai";
 
 type Embedding = {
   content: string;
@@ -63,4 +63,16 @@ export const findTopSimilarEmbeddings = async (
   similarities.sort((a, b) => b.similarity - a.similarity);
 
   return similarities.slice(0, top);
+};
+
+export const generateMessage = async (input: string) => {
+  const topSimilarEmbeddings = await findRelevantContent(input);
+
+  const { text } = await generateText({
+    model: openai("gpt-4o"),
+    prompt: input,
+    system: topSimilarEmbeddings.map((e) => e.content).join("\n"),
+  });
+
+  return text;
 };
