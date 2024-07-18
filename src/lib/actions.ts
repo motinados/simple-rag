@@ -70,8 +70,19 @@ export const generateMessage = async (input: string) => {
 
   const { text } = await generateText({
     model: openai("gpt-4o"),
-    prompt: input,
-    system: topSimilarEmbeddings.map((e) => e.content).join("\n"),
+    messages: [
+      {
+        role: "system",
+        content:
+          "Respond to the user's prompt using only the provided context.",
+      },
+      { role: "user", content: input },
+      {
+        role: "system",
+        content: `Here are some relevant information about the user:
+         ${topSimilarEmbeddings.map((e) => e.content).join("\n")}`,
+      },
+    ],
   });
 
   return text;
