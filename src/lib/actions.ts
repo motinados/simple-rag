@@ -87,3 +87,12 @@ export const generateMessageWithKnowledgeBase = async (input: string) => {
 
   return text;
 };
+
+export const generateMessageWithoutKnowledgeBase = async (input: string) => {
+  const { text } = await generateText({
+    model: openai("gpt-4o"),
+    messages: [{ role: "user", content: input }],
+  });
+
+  return text;
+};

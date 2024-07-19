@@ -1,12 +1,18 @@
 "use client";
-import { generateMessageWithKnowledgeBase } from "@/lib/actions";
+import {
+  generateMessageWithKnowledgeBase,
+  generateMessageWithoutKnowledgeBase,
+} from "@/lib/actions";
 
 export default function Home() {
   const run = async () => {
-    const result = await generateMessageWithKnowledgeBase(
-      "What is my favorite food?"
-    );
-    console.log(result);
+    const input = "What is my favorite food?";
+    const [result1, result2] = await Promise.all([
+      generateMessageWithKnowledgeBase(input),
+      generateMessageWithoutKnowledgeBase(input),
+    ]);
+    console.log(result1);
+    console.log(result2);
   };
 
   return (
