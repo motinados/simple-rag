@@ -21,20 +21,22 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center px-4 py-24">
       <button
         onClick={run}
         className="bg-blue-500 text-white px-4 py-2 rounded"
       >
-        Run
+        What is my favorite food?
       </button>
-      <div className="flex flex-col items-center">
-        <h2 className="text-xl font-bold">With RAG</h2>
-        <p className="text-gray-500">{resultWithRAG}</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <h2 className="text-xl font-bold">Without RAG</h2>
-        <p className="text-gray-500">{resultWithoutRAG}</p>
+      <div className="max-w-md pt-20 space-y-10">
+        <div className="flex flex-col items-center">
+          <h2 className="text-xl font-bold">With RAG</h2>
+          <p className="text-gray-500">{resultWithRAG}</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <h2 className="text-xl font-bold">Without RAG</h2>
+          <p className="text-gray-500">{resultWithoutRAG}</p>
+        </div>
       </div>
     </main>
   );
