@@ -1,15 +1,12 @@
 "use client";
-import {
-  generateMessageWithKnowledgeBase,
-  generateMessageWithoutKnowledgeBase,
-} from "@/lib/actions";
+import { generateTextWithRAG, generateTextWithoutRAG } from "@/lib/actions";
 
 export default function Home() {
   const run = async () => {
     const input = "What is my favorite food?";
     const [result1, result2] = await Promise.all([
-      generateMessageWithKnowledgeBase(input),
-      generateMessageWithoutKnowledgeBase(input),
+      generateTextWithRAG(input),
+      generateTextWithoutRAG(input),
     ]);
     console.log(result1);
     console.log(result2);

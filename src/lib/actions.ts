@@ -65,7 +65,7 @@ export const findTopSimilarEmbeddings = async (
   return similarities.slice(0, top);
 };
 
-export const generateMessageWithKnowledgeBase = async (input: string) => {
+export const generateTextWithRAG = async (input: string) => {
   const topSimilarEmbeddings = await findRelevantContent(input);
 
   const { text } = await generateText({
@@ -88,7 +88,7 @@ export const generateMessageWithKnowledgeBase = async (input: string) => {
   return text;
 };
 
-export const generateMessageWithoutKnowledgeBase = async (input: string) => {
+export const generateTextWithoutRAG = async (input: string) => {
   const { text } = await generateText({
     model: openai("gpt-4o"),
     messages: [{ role: "user", content: input }],
