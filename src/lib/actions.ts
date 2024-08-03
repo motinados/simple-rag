@@ -27,7 +27,7 @@ export const generateEmbeddings = async (value: string) => {
   return embeddings.map((e, i) => ({ content: chunks[i], embedding: e }));
 };
 
-const sampleText = `My favorite food is onigiri.
+const resource = `My favorite food is onigiri.
 My hobby is reading.
 I often go hiking on weekends.
 My favorite movie is "Spirited Away."
@@ -38,9 +38,9 @@ I love finding new restaurants.
 I go jogging every morning.
 `;
 
-export const findRelevantContent = async (input: string) => {
+export const findRelevantContent = async (input: string, resource: string) => {
   const embeddingsFromInput = await generateEmbeddings(input);
-  const embeddingsFromSample = await generateEmbeddings(sampleText);
+  const embeddingsFromSample = await generateEmbeddings(resource);
 
   const topSimilarEmbeddings = await findTopSimilarEmbeddings(
     embeddingsFromInput[0],
@@ -66,7 +66,7 @@ export const findTopSimilarEmbeddings = async (
 };
 
 export const generateTextWithRAG = async (input: string) => {
-  const topSimilarEmbeddings = await findRelevantContent(input);
+  const topSimilarEmbeddings = await findRelevantContent(input, resource);
 
   const { text } = await generateText({
     model: openai("gpt-4o"),
@@ -91,7 +91,15 @@ export const generateTextWithRAG = async (input: string) => {
 export const generateTextWithoutRAG = async (input: string) => {
   const { text } = await generateText({
     model: openai("gpt-4o"),
-    messages: [{ role: "user", content: input }],
+    messages: [
+      { role: "user", content: input },
+      {
+        role: "system",
+        content: `Here are some relevant information about the user:
+      ${resource}
+      `,
+      },
+    ],
   });
 
   return text;
