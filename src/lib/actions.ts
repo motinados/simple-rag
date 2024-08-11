@@ -27,7 +27,7 @@ export const generateEmbeddings = async (value: string) => {
   return embeddings.map((e, i) => ({ content: chunks[i], embedding: e }));
 };
 
-const resource = `My favorite food is onigiri.
+const resource = `My favorite food is sushi.
 My hobby is reading.
 I often go hiking on weekends.
 My favorite movie is "Spirited Away."
