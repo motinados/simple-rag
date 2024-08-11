@@ -91,15 +91,7 @@ export const generateTextWithRAG = async (input: string) => {
 export const generateTextWithoutRAG = async (input: string) => {
   const { text } = await generateText({
     model: openai("gpt-4o"),
-    messages: [
-      { role: "user", content: input },
-      {
-        role: "system",
-        content: `Here are some relevant information about the user:
-      ${resource}
-      `,
-      },
-    ],
+    messages: [{ role: "user", content: input }],
   });
 
   return text;
